@@ -23,9 +23,9 @@ class Graph:
             self.add_vertex(v1)
         self.vertices[v1].add(v2)
         # if v1 in self.vertices and v2 in self.vertices:
-            # self.vertices[v1].add(v2)   # there's an edge from v1 to v2
+        #     self.vertices[v1].add(v2)   # there's an edge from v1 to v2
         # else:
-            # raise IndexError("nonexistent vert")
+        #     raise IndexError("nonexistent vert")
 
     def get_neighbors(self, vertex_id):
         """
@@ -34,7 +34,6 @@ class Graph:
         if vertex_id in self.vertices:
             return self.vertices[vertex_id]
         return None
-        
     def bft(self, starting_vertex):
         """
         Print each vertex in breadth-first order
@@ -48,9 +47,12 @@ class Graph:
             value = queue.dequeue()
             if value not in visited:
                 visited.add(value)
-                print(value)
-                for neighbor in self.get_neighbors(value):
-                    queue.enqueue(neighbor)
+                # print(value)
+                if self.get_neighbors(value) is not None:
+                    for neighbor in self.get_neighbors(value):
+                        queue.enqueue(neighbor)
+                else:
+                    continue
 
     def dft(self, starting_vertex):
         """
@@ -174,13 +176,13 @@ class Graph:
 if __name__ == '__main__':
     graph = Graph()  # Instantiate your graph
     # https://github.com/LambdaSchool/Graphs/blob/master/objectives/breadth-first-search/img/bfs-visit-order.png
-    # graph.add_vertex(1)
-    # graph.add_vertex(2)
-    # graph.add_vertex(3)
-    # graph.add_vertex(4)
-    # graph.add_vertex(5)
-    # graph.add_vertex(6)
-    # graph.add_vertex(7)
+    graph.add_vertex(1)
+    graph.add_vertex(2)
+    graph.add_vertex(3)
+    graph.add_vertex(4)
+    graph.add_vertex(5)
+    graph.add_vertex(6)
+    graph.add_vertex(7)
     graph.add_edge(5, 3)
     graph.add_edge(6, 3)
     graph.add_edge(7, 1)
@@ -191,7 +193,6 @@ if __name__ == '__main__':
     graph.add_edge(3, 5)
     graph.add_edge(2, 3)
     graph.add_edge(4, 6)
-    # print(graph.get_neighbors(1))
 
     '''
     Should print:
@@ -238,4 +239,4 @@ if __name__ == '__main__':
         [1, 2, 4, 7, 6]
     '''
     # print(graph.dfs(1, 6))
-    # print(graph.dfs_recursive(1, 6))
+    print(graph.dfs_recursive(1, 6))
