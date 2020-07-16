@@ -61,7 +61,7 @@ class SocialGraph:
             self.add_friendship(friendship[0], friendship[1])
     
     def get_friends(self, user_id):
-        friends = sg.friendships
+        friends = self.friendships
         return friends[user_id]
 
     def get_all_social_paths(self, user_id):
@@ -80,14 +80,14 @@ class SocialGraph:
         while queue.size() > 0:
             path = queue.dequeue()
             value = path[-1]
-            if(value == 10):
-                return visited
+            # if(value == len(self.users)):
+            #     return visited
             if value not in visited:
                 visited[value] = path
-            for friend in self.get_friends(value):
-                newPath = list(path)
-                newPath.append(friend)
-                queue.enqueue(newPath)
+                for friend in self.friendships[value]:
+                    newPath = list(path)
+                    newPath.append(friend)
+                    queue.enqueue(newPath)
 
 
         return visited
