@@ -80,8 +80,6 @@ class SocialGraph:
         while queue.size() > 0:
             path = queue.dequeue()
             value = path[-1]
-            # if(value == len(self.users)):
-            #     return visited
             if value not in visited:
                 visited[value] = path
                 for friend in self.friendships[value]:
